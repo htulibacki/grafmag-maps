@@ -1,4 +1,4 @@
-# Formularz kontaktowy
+# Mapa na stronie internetowej przy wykorzystaniu Google Maps API
 
 Repozytorium z kodem do artykułu [Mapa na stronie internetowej przy wykorzystaniu Google Maps API](http://grafmag.pl/artykuly/mapa-na-stronie-internetowej-przy-wykorzystaniu-google-maps-api/) opublikowanego na łamach internetowego magazynu Grafmag.
 
