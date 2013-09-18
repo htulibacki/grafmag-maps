@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mapa na stronie internetowej przy wykorzystaniu Google Maps API</title>
+
+        <link href="http://fonts.googleapis.com/css?family=Roboto:300&amp;subset=latin-ext" rel="stylesheet">
+        <style>
+        html, body {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        header {
+            font-size: 32px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            line-height: 1.188em;
+            text-align: center;
+            padding: 60px 0px;
+            border-bottom: 10px solid #1969ba;
+            background-color: #232323;
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        header a:hover {
+            color: #c5e2ff;
+        }
+
+        #map {
+            position: absolute;
+            top: 168px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="http://grafmag.pl/artykuly/mapa-na-stronie-internetowej-przy-wykorzystaniu-google-maps-api/">Mapa na stronie internetowej przy wykorzystaniu Google Maps API</a>
+        </header>
+        <div id="map"></div>
+
+        <script src="//maps.google.com/maps/api/js?sensor=false&amp;language=pl"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="js/gmap3.min.js"></script>
+        <script>
+            $('#map').gmap3({
+                map: {
+                    options: {
+                        center: [53.137443, 18.061169],
+                        zoom: 12,
+                        mapTypeId: 'custom_style',
+                        mapTypeControlOptions: {
+                           mapTypeIds: ['custom_style', google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID]
+                        },
+                        panControl: false,
+                        zoomControl: false
+                    }
+                },
+                marker: {
+                    values:[{
+                        latLng: [53.128381, 17.998191],
+                        data: 'Dworcowa 50',
+                        options: {
+                            icon: new google.maps.MarkerImage('img/pizza.png', new google.maps.Size(32, 37, "px", "px"))
+                        }
+                    }, {
+                        latLng: [53.131457, 18.047158],
+                        data: 'Bartosza Głowackiego 49',
+                        options: {
+                            icon: new google.maps.MarkerImage('img/pizza3.png', new google.maps.Size(32, 37, "px", "px"))
+                        }
+                    }, {
+                        latLng: [53.106924, 18.045183],
+                        data: 'Wojska Polskiego 20D',
+                        options: {
+                            icon: new google.maps.MarkerImage('img/pizza2.png', new google.maps.Size(32, 37, "px", "px"))
+                        }
+                    }, {
+                        latLng: [53.155114, 18.146965],
+                        data: 'Oskara Langego 5',
+                        options: {
+                            icon: new google.maps.MarkerImage('img/pizza4.png', new google.maps.Size(32, 37, "px", "px"))
+                        }
+                    }],
+                    events:{
+                        click: function(marker, event, context) {
+                            var map = $(this).gmap3('get'),
+                                infowindow = $(this).gmap3({get:{name:'infowindow'}});
+                            if (infowindow) {
+                                infowindow.open(map, marker);
+                                infowindow.setContent(context.data);
+                            } else {
+                                $(this).gmap3({
+                                    infowindow: {
+                                        anchor: marker,
+                                        options: {content: context.data}
+                                    }
+                                });
+                            }
+                        }
+                    }
+                },
+                styledmaptype: {
+                    id: 'custom_style',
+                    options: {
+                        name: 'Mapa'
+                    },
+                    styles: [{
+                        stylers: [{
+                            saturation: -100
+                        }]
+                    }, {
+                        featureType: 'poi.business',
+                        stylers: [{
+                            visibility: 'off'
+                        }]
+                    }]
+                },
+                polygon: {
+                    values: [{
+                        options: {
+                            paths: [[53.136499, 18.016248], [53.138520, 18.002965], [53.137722, 17.980070], [53.141976, 17.977484], [53.160384, 17.975092], [53.165916, 17.971659], [53.172978, 17.970264], [53.182790, 17.968140], [53.188756, 17.971916], [53.200686, 17.984276], [53.206238, 17.983246], [53.208089, 17.974319], [53.203976, 17.970886], [53.199041, 17.970886], [53.194104, 17.962990], [53.184230, 17.953377], [53.172090, 17.953033], [53.157271, 17.954750], [53.150271, 17.957153], [53.147800, 17.947197], [53.142652, 17.945824], [53.148006, 17.920418], [53.163652, 17.921448], [53.164475, 17.908058], [53.153771, 17.902222], [53.157065, 17.889519], [53.138945, 17.879562], [53.134620, 17.879906], [53.136885, 17.892952], [53.133590, 17.913551], [53.132457, 17.926426], [53.132148, 17.941875], [53.127719, 17.965050], [53.126277, 17.976551], [53.125350, 17.985649], [53.123367, 18.001378], [53.122363, 18.006012], [53.136498, 18.016248]],
+                            strokeColor: '#dba300',
+                            fillColor: '#fade3c'
+                        }
+                    }, {
+                        options: {
+                            paths: [[53.123289748203966, 18.001441955566406], [53.1249379270702, 17.98839569091797], [53.126998061776156, 17.96539306640625], [53.13111803493987, 17.945823669433594], [53.13420775560363, 17.908058166503906], [53.135649549214314, 17.891921997070312], [53.134825673075596, 17.879905700683594], [53.115253971132816, 17.883338928222656], [53.105773944295905, 17.938270568847656], [53.09237469097508, 17.950973510742188], [53.09443638620693, 18.00556182861328], [53.095467196779204, 18.035430908203125], [53.09381788800968, 18.046417236328125], [53.082683400128644, 18.0670166015625], [53.065151055015725, 18.086929321289062], [53.06061210860822, 18.0889892578125], [53.064532135940254, 18.12469482421875], [53.065563662792094, 18.14014434814453], [53.096291827456334, 18.14769744873047], [53.11010204189727, 18.133621215820312], [53.11133856120981, 18.0999755859375], [53.11216288766498, 18.078346252441406], [53.1146357722166, 18.04779052734375], [53.11669640070406, 18.03234100341797]],
+                            strokeColor: '#d32202',
+                            fillColor: '#f08345'
+                        }
+                    }, {
+                        options: {
+                            paths: [[53.12246563507001, 18.00556182861328], [53.116078222527776, 18.033714294433594], [53.11133856120981, 18.08177947998047], [53.111750726412716, 18.108558654785156], [53.11236896680965, 18.13190460205078], [53.14141623983128, 18.1109619140625], [53.155829579842695, 18.11199188232422], [53.165298569356445, 18.089332580566406], [53.17167866676402, 18.054656982421875], [53.17558858019308, 18.029937744140625], [53.172913414762235, 17.970199584960938], [53.16035848761261, 17.975006103515625], [53.142034053627384, 17.97740936279297], [53.137915127134505, 17.98015594482422], [53.1385329912865, 18.002471923828125], [53.13647340955438, 18.016204833984375]],
+                            strokeColor: '#254987',
+                            fillColor: '#739feb'
+                        }
+                    }, {
+                        options: {
+                            paths: [[53.112781122136006, 18.13121795654297], [53.14244592455473, 18.108901977539062], [53.155211964490505, 18.112335205078125], [53.175382804158986, 18.12915802001953], [53.17888086250648, 18.15765380859375], [53.181144160030215, 18.190956115722656], [53.180732660272206, 18.195419311523438], [53.174148127227085, 18.197479248046875], [53.16447526188452, 18.19782257080078], [53.15665305315795, 18.192672729492188], [53.15212375445426, 18.18683624267578], [53.144711144060224, 18.16967010498047], [53.13894489578424, 18.154220581054688], [53.13214796651392, 18.139114379882812]],
+                            strokeColor: '#559313',
+                            fillColor: '#b6e97f'
+                        }
+                    }]
+                }
+            });
+        </script>
+    </body>
+</html>
